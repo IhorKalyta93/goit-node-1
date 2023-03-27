@@ -1,4 +1,4 @@
 const { getCurrentDate } = require(`./dateUtils`);
-console.log(
-    getCurrentDate
-)
+getCurrentDate();
+
+// console.log(Date.now());

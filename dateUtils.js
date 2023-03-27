@@ -1,7 +1,7 @@
-console.log("hello");
+
 
 function getCurrentDate() {
-    return console.log(Date.now);
+     return Date.now();
 }
 
 module.exports = {
