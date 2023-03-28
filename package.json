@@ -12,7 +12,10 @@
     "binary-extensions": "^2.2.0",
     "brace-expansion": "^1.1.11",
     "braces": "^3.0.2",
+    "bson": "^5.1.0",
+    "bson-objectid": "^2.0.4",
     "chokidar": "^3.5.3",
+    "commander": "^10.0.0",
     "concat-map": "^0.0.1",
     "debug": "^3.2.7",
     "fill-range": "^7.0.1",
@@ -35,7 +38,8 @@
     "supports-color": "^5.5.0",
     "to-regex-range": "^5.0.1",
     "touch": "^3.1.0",
-    "undefsafe": "^2.0.5"
+    "undefsafe": "^2.0.5",
+    "yargs": "^17.7.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

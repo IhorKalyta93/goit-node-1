@@ -1,32 +1,45 @@
-/*
- * Розкоментуйте і запиши значення
- * const contactsPath = ;
- */
-// const path
 
-// const contactsPath = path.join;
-// TODO: задокументувати кожну функцію
 const fsp = require("fs/promises");
 const path = require("path");
 const contactsPath = path.join(__dirname, "./db/contacts.json")
+const newID = require("bson-objectid");
 
-function listContacts() {
-  // ...твій код
+async function listContacts() {
+  try {
+    const result = await fsp.readFile(contactsPath);
+    return await JSON.parse(result);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function getContactById(contactId) {
-  // ...твій код
+async function getContactById(contactId) {
+  const contacts = await listContacts();
+  const result = await contacts.find((item) => item.id === contactId);
+  if (!result) return null;
+  return result;
 }
 
-function removeContact(contactId) {
-  // ...твій код
+async function removeContact(contactId) {
+  const contacts = await listContacts();
+  const index = contacts.findIndex((item) => item.id === contactId);
+  if (index === -1) return null;
+  const [result] = contacts.splice(index, 1);
+  await fsp.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+  return result;
 }
 
-function addContact(name, email, phone) {
-  // ...твій код
+async function addContact(name, email, phone) {
+  const contacts = await listContacts();
+  const newContact = {
+    name,
+    email,
+    phone,
+    id: newID(),
+  };
+  contacts.push(newContact);
+  await fsp.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+  return newContact;
 }
-// module.exports = {
-//     // getCurrentDate
-// }
 
-// console.log(__filename);
+module.exports = { listContacts, getContactById, removeContact, addContact };
